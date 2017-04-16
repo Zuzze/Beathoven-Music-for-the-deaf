@@ -1,18 +1,14 @@
 #change lyricsfile manually
-with open ("lyrics3.txt", "r") as lyricsfile:
+with open ("lyrics2.txt", "r") as lyricsfile:
     lyricsData=lyricsfile.read().replace('\n', ' ')
     lyricsData=lyricsData.replace('"', '')
+    lyricsData=lyricsData.replace(',', '')
+    lyricsData=lyricsData.replace('.', '')
+    lyricsData=lyricsData.replace('!', '')
+    lyricsData=lyricsData.replace('?', '')
     lyricsData=lyricsData.split(" ")
-    #print("LYRICS: ")
-    #print(lyricsData)
-
-    #change lyricsfile manually
-with open ("lyrics3.txt", "r") as lyricsfile:
-    lyricsData=lyricsfile.read().replace('\n', ' ')
-    lyricsData=lyricsData.replace('"', '')
-    lyricsData=lyricsData.split(" ")
-    #print("LYRICS: ")
-    #print(lyricsData)
+    print("LYRICS: ")
+    print(lyricsData)
 
     #neutral factor
     neutralWordCount = 0
@@ -23,7 +19,7 @@ with open ("lyrics3.txt", "r") as lyricsfile:
         neutralWords = []
         for lyricsWord in lyricsData:
             for neutralWord in neutralData:
-                if lyricsWord == neutralWord:
+                if lyricsWord.lower() == neutralWord.lower():
                     neutralWordCount+=1
                     neutralWords.append(neutralWord)
         print("=== Neutral [0-1]===:" )
@@ -42,7 +38,7 @@ with open ("lyrics3.txt", "r") as lyricsfile:
         posWords = []
         for lyricsWord in lyricsData:
             for posWord in posData:
-                if lyricsWord == posWord:
+                if lyricsWord.lower() == posWord.lower():
                     posWordCount+=1
                     posWords.append(posWord)
         print("=== Positive [0-1]===:" )
@@ -60,12 +56,12 @@ with open ("lyrics3.txt", "r") as lyricsfile:
         negWords = []
         for lyricsWord in lyricsData:
             for negWord in negData:
-                if lyricsWord == negWord:
+                if lyricsWord .lower()== negWord.lower():
                     negWordCount+=1
                     negWords.append(negWord)
         print("=== Negative [0-1]===:" )
         print(negWordCount/(len(lyricsData) - 1.0 - neutralWordCount))
         print("negative words: " + str(negWordCount))
         print(negWords)
-        print("all words: " + str(len(lyricsData)))
+        print("all words: " + str(len(lyricsData)-neutralWordCount))
    
